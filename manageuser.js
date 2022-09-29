@@ -1,17 +1,17 @@
 //© 2021 Sean Murdock
 
-let userName = "";
-let password = "";
+let phonenumber = "";
+let onetimepassword = "";
 let verifypassword = "";
 let passwordRegEx=/((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%!]).{6,40})/;
 
-function setusername(){
-    userName = $("#username").val();
+function setphonenumber(){
+    phonenumber = $("#phonenumber").val();
 }
 
-function setuserpassword(){
-    password = $("#password").val();
-    var valid=passwordRegEx.exec(password);
+function setonetimepassword(){
+    onetimepassword = $("#onetimepassword").val();
+    var valid=passwordRegEx.exec(onetimepassword);
     if (!valid){
         alert('Must be 6 digits, upper, lower, number, and symbol');
     }
@@ -19,7 +19,7 @@ function setuserpassword(){
 
 function setverifypassword(){
     verifypassword = $("#verifypassword").val();
-    if (verifypassword!=password){
+    if (verifypassword!=onetimepassword){
         alert('Passwords must be entered the same twice');
     }
 }
@@ -47,12 +47,12 @@ function checkexpiredtoken(token){
 }
 
 function userlogin(){
-    setuserpassword();
-    setusername();
+    setonetimepassword();
+    setphonenumber();
     $.ajax({
         type: 'POST',
-        url: 'https://dev.stedi.me/login',
-        data: JSON.stringify({userName, password}),
+        url: 'https://dev.stedi.me/twofactorlogin',
+        data: JSON.stringify({phonenumber, onetimepassword}),
         success: function(data) {
             window.location.href = "/timer.html#"+data;//add the token to the url
         },
@@ -123,6 +123,6 @@ var enterFunction = (event) =>{
     }
 }
 
-var passwordField = document.getElementById("password");
+var passwordField = document.getElementById("onetimepassword");
 
 passwordField.addEventListener("keyup", enterFunction);
