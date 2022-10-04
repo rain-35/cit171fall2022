@@ -11,10 +11,6 @@ function setphonenumber(){
 
 function setonetimepassword(){
     onetimepassword = $("#onetimepassword").val();
-    var valid=passwordRegEx.exec(onetimepassword);
-    if (!valid){
-        alert('Must be 6 digits, upper, lower, number, and symbol');
-    }
 }
 
 function setverifypassword(){
@@ -44,6 +40,22 @@ function checkexpiredtoken(token){
         contentType: "application/text",
         dataType: 'text' })
     }
+}
+
+const sendtext =()=>{
+    setonetimepassword();
+    setphonenumber();
+    if (phonenumber > 0){
+    $.ajax({
+        type: 'POST',
+        url: 'https://dev.stedi.me/twofactorlogin/'+phonenumber,
+        contentType: "application/text",
+        dataType: 'text',
+        success: function(_data){alert("Good job, you did it. Finally.")},
+    });
+} else {
+    alert("Put in your phone number in your freaking idiot")
+}
 }
 
 function userlogin(){
