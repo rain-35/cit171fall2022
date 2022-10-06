@@ -42,6 +42,10 @@ function checkexpiredtoken(token){
     }
 }
 
+const stupidbutton =()=>{
+    alert("HAHA You fool! You fell victem to one of the classic blunders. The most famous is never get involved in a land war in Asia, But only slightly less well-known is this. Never go in aginst a Sicilian when death is on the line!")
+}
+
 const sendtext =()=>{
     setonetimepassword();
     setphonenumber();
@@ -61,17 +65,26 @@ const sendtext =()=>{
 function userlogin(){
     setonetimepassword();
     setphonenumber();
+    if (onetimepassword > 0) {
     $.ajax({
         type: 'POST',
         url: 'https://dev.stedi.me/twofactorlogin',
-        data: JSON.stringify({phonenumber, onetimepassword}),
+        data: JSON.stringify({
+        "phoneNumber": +phonenumber,
+        "oneTimePassword": +onetimepassword
+    }),
         success: function(data) {
+
             window.location.href = "/timer.html#"+data;//add the token to the url
+            alert("aaaaassssss yooooouuuuuu wiiiiiiiishhhhhhh")
         },
         contentType: "application/text",
         dataType: 'text'
+    
     });
-
+    } else {
+        alert("Hello, my name is Inigo Montoya, you killed my father, prepare to die.")
+    }
 }
 
 function readonlyforms(formid){

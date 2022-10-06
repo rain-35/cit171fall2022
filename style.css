@@ -3122,6 +3122,11 @@ fieldset[disabled] .btn-default.focus {
   color: #424242;
   background-color: #ffffff;
 }
+.btn-stupid {
+  color: #ffffff;
+  background-color: #ff0000;
+  border-color: #ff0000;
+}
 .btn-primary {
   color: #ffffff;
   background-color: #214ad1;
